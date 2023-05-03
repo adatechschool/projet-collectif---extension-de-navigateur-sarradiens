@@ -1,5 +1,7 @@
-
- function startCountdown(durationInSeconds) {
+//document.getElementById("mybtn1").addEventListener("click",startCountdown(1800) );
+//document.getElementById("mybtn2").addEventListener("click",startCountdown(3200) );
+ 
+function startCountdown(durationInSeconds) {
     let timer = durationInSeconds;
     const countdownInterval = setInterval(function () {
       const minutes = Math.floor(timer / 60);
@@ -15,6 +17,12 @@
       }
     }, 1000);
   } 
+
+const box = document.getElementById('mybtn1');
+box.addEventListener('click', () => {
+  startCountdown(1800);
+  box.remove();
+});
   // USER CHOISIT DANS MENU 30MIN,60MIN,1H ET LE JS VA CONVERTIR EN SECONDE ET RENTRER LA DEMANDE EN PARAMÈTRE DE LA FONCTION
   // HTML = 30MN, 60MN, 120MN, ETC
   // => JS = 1800S, 3600S, 7200S
