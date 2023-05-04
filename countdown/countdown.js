@@ -16,13 +16,31 @@ function startCountdown(durationInSeconds) {
         console.log('Time is up!');
       }
     }, 1000);
-  } 
+} 
 
 const box = document.getElementById('mybtn1');
+const box1 = document.getElementById('mybtn2');
+const box2 = document.getElementById('mybtn3');
+
+
 box.addEventListener('click', () => {
   startCountdown(1800);
-  box.remove();
+  box1.remove();
+  box2.remove();
 });
+
+box1.addEventListener('click', () => {
+  startCountdown(3600);
+  box.remove();
+  box2.remove();
+});
+
+box2.addEventListener('click', () => {
+  startCountdown(7200);
+  box1.remove();
+  box2.remove();
+});
+
   // USER CHOISIT DANS MENU 30MIN,60MIN,1H ET LE JS VA CONVERTIR EN SECONDE ET RENTRER LA DEMANDE EN PARAMÈTRE DE LA FONCTION
   // HTML = 30MN, 60MN, 120MN, ETC
   // => JS = 1800S, 3600S, 7200S
