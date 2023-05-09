@@ -1,6 +1,18 @@
- function startCountdown(durationInSeconds) {
+const init = function() {
+  const injectElement = document.createElement('div');
   
-
+  // créer un élement DIV
+  injectElement.className = 'test-element';
+​
+  injectElement.innerHTML = 'djshfgskfhslvk';
+  
+  // ajout div dans body
+  document.body.appendChild(injectElement);
+  // faire naitre dans le body notre élément
+}
+init() // puis on appèle notre fonction
+ 
+ function startCountdown(durationInSeconds) {
     let timer = durationInSeconds;
     const countdownInterval = setInterval(function () {
       const minutes = Math.floor(timer / 60);
