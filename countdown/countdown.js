@@ -1,20 +1,65 @@
+//document.getElementById("mybtn1").addEventListener("click",startCountdown(1800) );
+//document.getElementById("mybtn2").addEventListener("click",startCountdown(3200) );
 
- function startCountdown(durationInSeconds) {
+function startCountdown(durationInSeconds) {
     let timer = durationInSeconds;
     const countdownInterval = setInterval(function () {
       const minutes = Math.floor(timer / 60);
       const seconds = Math.floor(timer % 60);
-  
+      
+      const remainingTime = document.getElementById("timeremaining")
+      remainingTime.innerText = minutes+":"+seconds
+      
       console.log(`${minutes}:${seconds}`);
   
       timer--;
   
       if (timer < 0) {
         clearInterval(countdownInterval);
+        const timerEnding = document.getElementById("timerEnding")
+        timerEnding.innerText = 'Time is up!'
+        const timerEnding = document.getElementById("timerEnding")
+        timerEnding.innerText = 'Time is up!'
         console.log('Time is up!');
+        
+        
       }
     }, 1000);
-  } 
+    
+  
+} 
+
+const box = document.getElementById('mybtn1');
+const box1 = document.getElementById('mybtn2');
+const box2 = document.getElementById('mybtn3');
+
+
+box.addEventListener('click', () => {
+  startCountdown(5);
+  box.remove();
+  box1.remove();
+  box2.remove();  
+  box.remove();  
+
+});
+
+box1.addEventListener('click', () => {
+  startCountdown(3600);
+  box.remove();
+  box1.remove();
+  box2.remove();
+  box1.remove();  
+
+});
+
+box2.addEventListener('click', () => {
+  startCountdown(7200);
+  box.remove();
+  box1.remove();
+  box2.remove();
+  box.remove();  
+
+});
   // USER CHOISIT DANS MENU 30MIN,60MIN,1H ET LE JS VA CONVERTIR EN SECONDE ET RENTRER LA DEMANDE EN PARAMÈTRE DE LA FONCTION
   // HTML = 30MN, 60MN, 120MN, ETC
   // => JS = 1800S, 3600S, 7200S
