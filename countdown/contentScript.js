@@ -51,10 +51,23 @@ function startCountdown(durationInSeconds) {
     timer--;
 
     if (timer < 0) {
+      fetch('https://api.api-ninjas.com/v1/bucketlist', {
+        method: 'GET',
+        headers: {
+          'X-Api-Key': 'Sb92WYfy+/JwV46RaHJ6lg==SGIDAbGZebsa0pAj',
+        },
+      })
+      .then(response => {const data = response.json();
+      return data
+      })
+      .then((data) => {
+        timerEnding.innerText = 'Idea for your bucketlist: ' + `${data.item}`
+      })
+      .catch(err => console.error(err));
+      
       clearInterval(countdownInterval);
       const timerEnding = document.getElementById("timerEnding")
-      timerEnding.innerText = 'Time is up!'
-      console.log('Time is up!');
+      timerEnding.innerText = ""
       
       
     }
