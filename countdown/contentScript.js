@@ -1,15 +1,9 @@
-
-  const injectElement = document.createElement('div');
-  // créer un élement DIV
+// créer un élement DIV
+const injectElement = document.createElement('div');  
   injectElement.className = 'test-element';
-  injectElement.innerHTML = ''
-  //`${minutes}:${seconds}`
-  // ajout div dans body
+  injectElement.innerHTML = '' 
   document.body.appendChild(injectElement);
-  // faire naitre dans le body notre élément
-
- // puis on appèle notre fonction
-
+  
  const myBtn1 = document.createElement('button');
 myBtn1.innerHTML= '30 minutes'
 myBtn1.id = 'mybtn1'
@@ -25,6 +19,13 @@ myBtn3.innerHTML= '120 minutes'
 myBtn3.id = 'mybtn3'
 injectElement.appendChild(myBtn3)
 
+
+const myBtnpause = document.createElement('button');
+myBtnpause.innerHTML= 'Pause'
+myBtnpause.id = 'mybtnp'
+//myBtnpause.disabled='disabled'
+injectElement.appendChild(myBtnpause)
+
  const timeremaining = document.createElement('div');
 timeremaining.innerHTML= ''
 timeremaining.id = 'timeremaining'
@@ -35,19 +36,20 @@ timerEnding.innerHTML= ''
 timerEnding.id = 'timerEnding'
 injectElement.appendChild(timerEnding)
 
-
+let timerInterval;
+let timerPaused = false;
 
 function startCountdown(durationInSeconds) {
-  let timer = durationInSeconds;
+
+  let timer = durationInSeconds; 
   const countdownInterval = setInterval(function () {
+    if (!timerPaused){
     const minutes = Math.floor(timer / 60);
     const seconds = Math.floor(timer % 60);
     
-    const remainingTime = document.getElementById("timeremaining")
+    const remainingTime = document.getElementById("timeremaining");
     remainingTime.innerText = minutes+":"+seconds
-    
-    console.log(`${minutes}:${seconds}`);
-
+    //console.log(`${minutes}:${seconds}`);    
     timer--;
 
     if (timer < 0) {
@@ -69,17 +71,28 @@ function startCountdown(durationInSeconds) {
       const timerEnding = document.getElementById("timerEnding")
       timerEnding.innerText = ""
       
-      
+    } 
     }
   }, 1000);
   
-
+  timerInterval = countdownInterval;
 } 
 
+/*function arret() 
+		{	
+      console.log('test');
+				window.clearTimeout(timeremaining); // arrêter le temps
+				document.parametre.lance.disabled = "";
+				document.parametre.pause.disabled = "";
+				document.parametre.zero.disabled = "";
+				document.parametre.interme.disabled = "";
+		};*/
+
+
+    const boxPause= document.getElementById('mybtnp');
 const box = document.getElementById('mybtn1');
 const box1 = document.getElementById('mybtn2');
 const box2 = document.getElementById('mybtn3');
-
 
 box.addEventListener('click', () => {
 startCountdown(5);
@@ -106,4 +119,18 @@ box1.remove();
 box2.remove();
 box.remove();  
 
+});
+
+boxPause.addEventListener('click', ()=> {
+  if (!timerPaused) {
+clearInterval(timerInterval);
+    timerPaused = true;
+    myBtnpause.innerText = "Resume";
+    } else {
+      //const tabTemp=(document.getElementById("timeremaining").innerText).split(':');
+      //console.log(document.getElementById("timeremaining").innerText);
+    startCountdown(parseInt(document.getElementById("timeremaining").innerText)*60);
+    timerPaused = false;
+    myBtnpause.innerText = "Pause";
+  }
 });
